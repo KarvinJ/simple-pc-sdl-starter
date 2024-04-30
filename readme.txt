@@ -1,4 +1,4 @@
-Install the latest version of MinGW-w64 via MSYS2
+Install the latest version of MinGW-w64 via MSYS2: https://code.visualstudio.com/docs/cpp/config-mingw
  
 actual version MinGW-w64 version use: gcc-g++ versions (Rev3, Built by MSYS2 project) 13.2.0
 
