@@ -5,6 +5,8 @@ SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 SDL_Rect rectangle;
 
+int rectangleSpeed = 600;
+
 const int SCREEN_WIDTH = 960;
 const int SCREEN_HEIGHT = 544;
 const int FRAME_RATE = 60; // Desired frame rate (frames per second)
@@ -27,24 +29,24 @@ void handleEvents() {
 }
 
 // Function to update rectangle movement.
-void update() {
+void update(float deltaTime) {
 
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
-    if (currentKeyStates[SDL_SCANCODE_W]) {
-        rectangle.y -= 10;
+    if (currentKeyStates[SDL_SCANCODE_W] && rectangle.y > 0) {
+        rectangle.y -= rectangleSpeed * deltaTime;
     }
 
-    else if (currentKeyStates[SDL_SCANCODE_S]) {
-        rectangle.y += 10;
+    else if (currentKeyStates[SDL_SCANCODE_S] && rectangle.y < SCREEN_HEIGHT - rectangle.h) {
+        rectangle.y += rectangleSpeed * deltaTime;
     }
 
-    else if (currentKeyStates[SDL_SCANCODE_A]) {
-        rectangle.x -= 10;
+    else if (currentKeyStates[SDL_SCANCODE_A] && rectangle.x > 0) {
+        rectangle.x -= rectangleSpeed * deltaTime;
     }
 
-    else if (currentKeyStates[SDL_SCANCODE_D]) {
-        rectangle.x += 10;
+    else if (currentKeyStates[SDL_SCANCODE_D] && rectangle.x < SCREEN_WIDTH - rectangle.w) {
+        rectangle.x += rectangleSpeed * deltaTime;
     }
 }
 
@@ -103,17 +105,26 @@ int main() {
     rectangle.w = 32;
     rectangle.h = 32;
 
-    // Main loop
+    Uint32 previousFrameTime = SDL_GetTicks();
+    Uint32 currentFrameTime = previousFrameTime;
+    float deltaTime = 0.0f;
 
+    // Main loop
     while (true) {
         
-        Uint32 frameStartTime = SDL_GetTicks();
+        currentFrameTime = SDL_GetTicks();
+
+    // Calculate delta time in seconds
+        deltaTime = (currentFrameTime - previousFrameTime) / 1000.0f; // Convert to seconds
+
+    // Update the previous frame time for the next iteration
+        previousFrameTime = currentFrameTime;
 
         handleEvents();
-        update();
+        update(deltaTime);
         render();
 
-        capFrameRate(frameStartTime);
+        // capFrameRate(currentFrameTime);
     }
 
     SDL_DestroyRenderer(renderer);
