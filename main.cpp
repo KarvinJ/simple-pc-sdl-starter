@@ -99,10 +99,7 @@ int main() {
         return 1;
     }
 
-    rectangle.x = SCREEN_WIDTH / 2 - 16;
-    rectangle.y = SCREEN_HEIGHT / 2 - 16;
-    rectangle.w = 32;
-    rectangle.h = 32;
+    rectangle = {SCREEN_WIDTH / 2 - 16, SCREEN_HEIGHT / 2 - 16, 32, 32};
 
     Uint32 previousFrameTime = SDL_GetTicks();
     Uint32 currentFrameTime = previousFrameTime;
