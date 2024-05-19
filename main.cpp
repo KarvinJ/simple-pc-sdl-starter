@@ -123,9 +123,9 @@ int main() {
         // capFrameRate(currentFrameTime);
     }
 
+//Clean up functions
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
-
     return 0;
 }
