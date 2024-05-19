@@ -10,6 +10,14 @@ const int SCREEN_WIDTH = 960;
 const int SCREEN_HEIGHT = 544;
 const int FRAME_RATE = 60; // Desired frame rate (frames per second)
 
+//Exit the game and clean up
+void quitGame() {
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+}
+
 // Function to handle events
 void handleEvents() {
 
@@ -19,9 +27,7 @@ void handleEvents() {
 
         if (event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE) {
             
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            SDL_Quit();
+            quitGame();
             exit(0);
         }
     }
@@ -123,9 +129,6 @@ int main() {
         // capFrameRate(currentFrameTime);
     }
 
-//Clean up functions
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    quitGame();
     return 0;
 }
