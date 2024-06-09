@@ -130,5 +130,4 @@ int main() {
     }
 
     quitGame();
-    return 0;
 }
