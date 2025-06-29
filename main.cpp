@@ -1,5 +1,5 @@
 #include <iostream>
-#include "inc/SDL2/SDL.h"
+#include "include/SDL2/SDL.h"
 
 SDL_Window *window = nullptr;
 SDL_Renderer *renderer = nullptr;
